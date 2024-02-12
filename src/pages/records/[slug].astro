@@ -1,0 +1,22 @@
+---
+import {getAllRecords} from "../../sanity/api.js"
+import { urlFromImage } from '../../sanity/urlFromImage.js';
+import PortableText from '../../components/PortableText.astro';
+import MainLayout from "../../layouts/MainLayout.astro"
+
+export async function getStaticPaths() {
+    const allRecords = await getAllRecords();
+
+    return allRecords.map(record => ({ params: { slug: record.slug.current }, props: { record } }));
+
+}
+
+const { record } = Astro.props;
+---
+
+<MainLayout>
+    <h1>{record.title}</h1>
+    <h1>{record.record}</h1>
+    <img src={urlFromImage(record.coverImage).width(300).url()} >
+    <PortableText portableText={record.body} />
+</MainLayout>

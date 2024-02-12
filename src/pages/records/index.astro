@@ -1,0 +1,22 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro"
+import {getAllRecords} from "../../sanity/api.js"
+import { urlFromImage } from '../../sanity/urlFromImage.js';
+
+const records = await getAllRecords();
+---
+
+<MainLayout title="GATERIS">
+	<div class="text-3xl font-bold underline">IERAKSTI</div>
+	<ul class="flex gap-2">
+        {records.map(record => (
+          <li class="font-bold text-2xl">
+            <a href={`/records/${record.slug.current}`}>
+            {record.title}
+			{record.record}
+			<img src={urlFromImage(record.coverImage).url()} width="400px" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </MainLayout>

@@ -1,0 +1,13 @@
+---
+import {getAllPosts, getAllRecords} from "../sanity/api.js";
+import { urlFromImage } from '../sanity/urlFromImage.js';
+import PortableText from '../components/PortableText.astro';
+import MainLayout from "../layouts/MainLayout.astro"
+
+const posts = await getAllPosts();
+const records = await getAllRecords();
+---
+
+<MainLayout title="GATERIS">
+	<div class="text-3xl font-bold underline">MAIN PAGE</div>
+</MainLayout>
